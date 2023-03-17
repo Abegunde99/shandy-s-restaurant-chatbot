@@ -73,8 +73,6 @@ socket.on("multipleOrdersPicked", function (message) {
 //listen for order
 socket.on("orders", function (message) {
 
- console.log(message);
-
   //get the total amount of the order
   let total = 0;
   for (let i = 0; i < message.length; i++) {
@@ -88,7 +86,6 @@ socket.on("orders", function (message) {
 
 //listen for all orders
 socket.on("allOrders", function (message) {
-  console.log(message);
   createChat8(message);
   chatContainer.scrollTop = chatContainer.scrollHeight;
 });
@@ -250,54 +247,6 @@ function createChat8(message) {
     div.innerHTML += `<p class="small p-2 ms-3 mb-1 rounded-3 font-weight-bold d-block" style="background-color: #f5f6f7;"> Total: #${total} </p><br>`;
     total = 0;
     }
-    
-    
-  chatContainer.appendChild(div);
-}
-
-function createChat9(message) {
-  const msg = Array.from(message);
-  //looping through the array of arrays
-
-  let id = 1;
-  const div = document.createElement("div");
-  div.setAttribute("class", "d-flex  justify-content-start");
-  div.setAttribute("id", "order")
-  div.innerHTML = `<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
-    alt="avatar 1" style="width: 45px; height: 100%;">
-    <div>
-    <p class="small p-2 ms-3 mb-1 rounded-3 font-weight-bold " style="background-color: #f5f6f7;"> <u>YOUR ORDERS</u></p><br>
-    ${msg
-    .map((item) => {
-      const p = document.createElement("p");
-      p.setAttribute("class", "small p-2 ms-3 mb-1 rounded-3 font-weight-bold d-block");
-      p.setAttribute("style", "background-color: #f5f6f7;");
-      p.innerHTML =
-       `order ${id++}
-        `;
-      const div = document.getElementById("order");
-      div.append(p);
-      item.forEach((item) => {
-        const p1 = document.createElement("p");
-        p1.setAttribute("class", "small p-2 ms-3 mb-1 rounded-3 font-weight-bold d-block");
-        p1.setAttribute("style", "background-color: #f5f6f7;");
-        p1.innerHTML =
-          `${item.name} - #${item.price}`;
-        const div = document.getElementById("order");
-        div.appendChild(p);
-        let total = 0;
-        item.forEach((item) => {
-        total += item.price;
-        });
-        const p2 = document.createElement("p");
-        p2.setAttribute("class", "small p-2 ms-3 mb-1 rounded-3 font-weight-bold d-block");
-        p2.setAttribute("style", "background-color: #f5f6f7;");
-        p2.innerHTML = ` Total: #${total}`
-        total = 0;
-      });
-      
-    })
-    .join("")}
-    </div>`;
+     
   chatContainer.appendChild(div);
 }
